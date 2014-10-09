@@ -1,0 +1,42 @@
+---
+- hosts: all
+
+  vars:
+    collectd_load_plugins:
+      - syslog
+      - apache
+      - battery
+      - cpu
+      - df
+      - disk
+      - entropy
+      - filecount
+      - interface
+      - load
+      - memcached
+      - memory
+      - processes
+      - swap
+      - tail
+      - write_graphite
+
+  pre_tasks:
+    - name: Update APT cache
+      apt: update_cache=yes
+
+  roles:
+    - { role: "azavea.graphite", graphite_web_secret_key: "d41d8cd98f00b204e9800998ecf8427e" }
+    - { role: "azavea.statsite" }
+
+  tasks:
+    - name: Configure Collectd plugins
+      template: src=templates/{{ item }}.conf.j2 dest=/etc/collectd/collectd.conf.d/{{ item }}.conf
+      with_items:
+        - apache
+        - df
+        - filecount
+        - memcached
+        - tail
+        - write_graphite
+      notify:
+        - Restart Collectd
