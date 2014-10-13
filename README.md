@@ -8,6 +8,7 @@ An Ansible role for installing [Graphite](http://graphite.wikidot.com).
 - `graphite_whisper_version` - Whisper version
 - `graphite_web_version` - Graphite Web version
 - `graphite_home` - Default directory for Graphite (default: `/opt/graphite`)
+- `graphite_web_port` - Default Apache virtual host port for Graphite Web (default: `8080`)
 - `graphite_web_secret_key` - The value of `SECRET_KEY` for Graphite Web (default: `SECRET`)
 
 ## Example Playbook

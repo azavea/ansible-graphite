@@ -6,6 +6,7 @@
   shell: "python check-dependencies.py && python setup.py install"
   args:
     chdir: /usr/local/src/graphite-web
+    creates: /opt/graphite/conf/graphite.wsgi.example
 
 - name: Configure graph template colors
   copy: src=graphTemplates.conf dest={{ graphite_home }}/conf/graphTemplates.conf

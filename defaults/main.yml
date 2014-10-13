@@ -5,4 +5,5 @@ graphite_web_version: "0.9.12"
 
 graphite_home: "/opt/graphite"
 
+graphite_web_port: 8080
 graphite_web_secret_key: "SECRET"
