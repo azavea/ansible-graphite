@@ -6,6 +6,7 @@
   command: "python setup.py install"
   args:
     chdir: /usr/local/src/carbon
+    creates: /opt/graphite/bin/carbon-cache.py
 
 - name: Create service account for Carbon
   user: name=carbon
