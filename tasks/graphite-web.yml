@@ -1,0 +1,71 @@
+---
+- name: Install Graphite Web dependencies
+  pip: requirements=/usr/local/src/graphite-web/requirements.txt
+
+- name: Install Graphite Web
+  shell: "python check-dependencies.py && python setup.py install"
+  args:
+    chdir: /usr/local/src/graphite-web
+
+- name: Configure graph template colors
+  copy: src=graphTemplates.conf dest={{ graphite_home }}/conf/graphTemplates.conf
+
+- name: Configure Graphite Web
+  template: src=graphite/webapp/local_settings.py.j2
+            dest={{ graphite_home }}/webapp/graphite/local_settings.py
+  notify:
+    - Restart Apache
+
+- name: Configure Graphite Web WSGI
+  template: src=graphite/conf/graphite.wsgi.j2
+            dest={{ graphite_home }}/conf/graphite.wsgi
+            mode=755
+  notify:
+    - Restart Apache
+
+- name: Prepare initial data fixture
+  copy: src=initial_data.json dest={{ graphite_home }}/webapp/graphite/initial_data.json
+
+- name: Setup the Graphite Web database
+  command: "python manage.py syncdb --noinput"
+  args:
+    chdir: "{{ graphite_home }}/webapp/graphite"
+
+- name: Set permissions for storage
+  file: path={{ graphite_home }}/storage
+        mode=0775
+        owner=www-data
+        group=carbon
+        state=directory
+
+- name: Set permissions for graphite.db
+  file: path={{ graphite_home }}/storage/graphite.db
+        owner=www-data
+        group=www-data
+        state=file
+
+- name: Create Apache log directory
+  file: path={{ graphite_home }}/storage/log/apache2
+        state=directory
+
+- name: Set permissions for Graphite Web logs
+  file: path={{ graphite_home }}/storage/log/webapp
+        owner=www-data
+        group=www-data
+        state=directory
+
+- name: Configure Apache site for Graphite Web
+  template: src=apache/graphite.conf.j2
+            dest=/etc/apache2/sites-available/graphite.conf
+  notify:
+    - Restart Apache
+
+- name: Enable Apache site for Graphite Web
+  command: a2ensite graphite
+  register: a2ensite
+  failed_when: >
+    a2ensite.rc != 0 and "graphite already" not in a2ensite.stdout
+  changed_when: >
+    a2ensite.rc == 0 and "Enabling site graphite" in a2ensite.stdout
+  notify:
+    - Restart Apache

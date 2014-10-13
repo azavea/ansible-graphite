@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+# Ensure role dependencies are in place
+if [ "up", "provision" ].include?(ARGV.first) && File.directory?("roles") &&
+  !(File.directory?("roles/azavea.python") || File.symlink?("roles/azavea.python")) ||
+  !(File.directory?("roles/azavea.pip") || File.symlink?("roles/azavea.pip")) ||
+  !(File.directory?("roles/azavea.apache2") || File.symlink?("roles/azavea.apache2")) ||
+  !(File.directory?("roles/azavea.git") || File.symlink?("roles/azavea.git")) ||
+  !(File.directory?("roles/azavea.memcached") || File.symlink?("roles/azavea.memcached")) ||
+  !(File.directory?("roles/azavea.collectd") || File.symlink?("roles/azavea.collectd")) ||
+  !(File.directory?("roles/azavea.statsite") || File.symlink?("roles/azavea.statsite"))
+  system("ansible-galaxy install --force -r roles.txt -p roles")
+end
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "site.yml"
+    ansible.sudo = true
+  end
+end

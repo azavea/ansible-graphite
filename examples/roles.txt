@@ -1,0 +1,7 @@
+azavea.python,0.1.0
+azavea.pip,0.1.0
+azavea.apache2,0.1.0
+azavea.git,0.1.0
+azavea.memcached,0.1.0
+azavea.collectd,0.1.0
+azavea.statsite,0.1.0

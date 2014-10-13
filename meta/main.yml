@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Hector Castro
+  description: An Ansible role for installing Graphite.
+  company: Azavea Inc.
+  license: Apache
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - system
+  - monitoring
+dependencies:
+  - { role: "azavea.python", python_development: True }
+  - { role: "azavea.pip" }
+  - { role: "azavea.apache2", apache_delete_default_site: True }
+  - { role: "azavea.git" }
+  - { role: "azavea.memcached" }
+  - { role: "azavea.collectd" }
