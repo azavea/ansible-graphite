@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *:{{ graphite_web_port }}>
   ServerName graphite
   CustomLog /opt/graphite/storage/log/apache2/access.log combined
   ErrorLog /opt/graphite/storage/log/apache2/error.log
