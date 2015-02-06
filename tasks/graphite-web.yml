@@ -55,6 +55,11 @@
         group=www-data
         state=directory
 
+- name: Enable mod_headers
+  apache2_module: state=present name=headers
+  notify:
+    - Restart Apache
+
 - name: Configure Apache site for Graphite Web
   template: src=apache/graphite.conf.j2
             dest=/etc/apache2/sites-available/graphite.conf
