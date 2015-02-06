@@ -3,6 +3,10 @@
   CustomLog /opt/graphite/storage/log/apache2/access.log combined
   ErrorLog /opt/graphite/storage/log/apache2/error.log
 
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, OPTIONS"
+  Header set Access-Control-Allow-Headers "origin, authorization, accept"
+
   WSGIScriptAlias / /opt/graphite/conf/graphite.wsgi
 
   RedirectMatch ^/admin(.*)admin/([^/]+)/([^/]+)$ /media/$2/$3
