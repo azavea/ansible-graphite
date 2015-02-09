@@ -12,6 +12,10 @@
 pattern = ^collectd\.
 retentions = 10s:1w, 60s:1y
 
+[statsite]
+pattern = ^statsite.*
+retentions = 10s:6h,1min:6d,10min:1800d
+
 [default]
 pattern = .*
 retentions = 60s:1y
