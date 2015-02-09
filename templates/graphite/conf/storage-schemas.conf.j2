@@ -9,8 +9,8 @@
 # CARBON_METRIC_PREFIX and CARBON_METRIC_INTERVAL settings
 
 [collectd]
-pattern = ^collectd\.
-retentions = 10s:1w, 60s:1y
+pattern = ^collectd.*
+retentions = 10s:1d,1min:7d,10min:1y
 
 [statsite]
 pattern = ^statsite.*
