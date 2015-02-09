@@ -1,3 +1,8 @@
+## 0.4.0
+
+- Add default retention period for Statsite metrics.
+- Add a more relaxed default retention period for Collectd metrics.
+
 ## 0.3.0
 
 - Add Apache support for CORS.
