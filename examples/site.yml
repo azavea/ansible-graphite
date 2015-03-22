@@ -2,6 +2,7 @@
 - hosts: all
 
   vars:
+    apache_port: 8080
     collectd_load_plugins:
       - syslog
       - apache
