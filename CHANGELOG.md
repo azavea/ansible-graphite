@@ -1,3 +1,7 @@
+## 0.5.0
+
+- Add support for version `0.9.13-pre1`.
+
 ## 0.4.0
 
 - Add default retention period for Statsite metrics.

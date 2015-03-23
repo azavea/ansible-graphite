@@ -15,15 +15,11 @@ An Ansible role for installing [Graphite](http://graphite.wikidot.com).
 
 First, ensure that you override `graphite_web_secret_key` with a random string. This is used by the Graphite Web Django application for salting hashes used in auth tokens, CRSF middleware, cookie storage, etc.
 
-The other bit of important information is the default administrator credentials for the Graphite Web Django application:
-
-Username: `admin@example.com`  
-Password: `admin`
-
-You can changes these after the installation completes with:
+There are no default administrator credentials for the Graphite Web Django application. You can set them after the installation completes with:
 
 ```bash
-$ sudo python manage.py changepassword admin
+$ cd /opt/graphite/webapp/graphite
+$ sudo python manage.py createsuperuser
 ```
 
 See the [examples](./examples/) directory for more details.
