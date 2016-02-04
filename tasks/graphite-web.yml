@@ -20,9 +20,13 @@
 - name: Configure Graphite Web WSGI
   template: src=graphite/conf/graphite.wsgi.j2
             dest={{ graphite_home }}/conf/graphite.wsgi
-            mode=755
+            mode=0755
   notify:
     - Restart Apache
+
+- name: Ensure that manage.py is executable
+  file: path="{{ graphite_home }}/webapp/graphite/manage.py"
+        mode=0755
 
 - name: Setup the Graphite Web database
   django_manage: command=syncdb
