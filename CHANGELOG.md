@@ -1,3 +1,9 @@
+## 0.6.0
+
+- Add backward compatible support for Ansible 2.0.
+- Updated the `azavea.statsite` role to `1.0.0`.
+- Updated the `azavea.apache2` role to `0.2.3`.
+
 ## 0.5.0
 
 - Add support for version `0.9.13-pre1`.
