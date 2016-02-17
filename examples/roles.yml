@@ -1,0 +1,14 @@
+- src: azavea.python
+  version: 0.1.0
+- src: azavea.pip
+  version: 0.1.1
+- src: azavea.apache2
+  version: 0.2.3
+- src: azavea.git
+  version: 0.1.0
+- src: azavea.memcached
+  version: 0.1.0
+- src: azavea.collectd
+  version: 0.2.0
+- src: azavea.statsite
+  version: 1.1.0
