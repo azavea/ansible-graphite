@@ -12,7 +12,7 @@ if [ "up", "provision" ].include?(ARGV.first) && File.directory?("roles") &&
   !(File.directory?("roles/azavea.memcached") || File.symlink?("roles/azavea.memcached")) ||
   !(File.directory?("roles/azavea.collectd") || File.symlink?("roles/azavea.collectd")) ||
   !(File.directory?("roles/azavea.statsite") || File.symlink?("roles/azavea.statsite"))
-  system("ansible-galaxy install --force -r roles.txt -p roles")
+  system("ansible-galaxy install --force -r roles.yml -p roles")
 end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
