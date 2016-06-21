@@ -1,3 +1,7 @@
+## 0.6.2
+
+- Updated the `azavea.apache2` role to `0.2.4`.`
+
 ## 0.6.1
 
 - Updated the `azavea.statsite` role to `1.1.0`.
